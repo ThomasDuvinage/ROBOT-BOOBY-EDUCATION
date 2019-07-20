@@ -1,11 +1,5 @@
 #include "BobySteppers.h"
 
-/*****************************************************
- *      	    Méthodes et Constructeur               *
- *                   BobySteppers                   *
- *                                                   *
- *****************************************************/
-
 BobySteppers::BobySteppers()
 {
     SStepper droite(BobyDroitB2, BobyDroitA2, BobyDroitB1, BobyDroitA1);
@@ -16,7 +10,6 @@ BobySteppers::BobySteppers()
 
 bool BobySteppers::run()
 {
-	uint8_t i;
   bool ret = false;
 	if ( _stepperD.distanceToGo() != 0)
 	{
@@ -34,8 +27,7 @@ bool BobySteppers::run()
 
 void BobySteppers::runSpeedToPosition()
 {
-    while (run())
-	;
+    while (run());
 }
 
 void BobySteppers::setPositions(){
@@ -46,8 +38,6 @@ void BobySteppers::setPositions(){
 void BobySteppers::moveTo(long absoluteD, long absoluteG){
 	// First find the stepper that will take the longest time to move
     float longestTime = 0.0;
-
-    uint8_t i;
 
 	long thisDistance = absoluteD - _stepperD.currentPosition();
 	float thisTime = abs(thisDistance) / _stepperD.maxSpeed();
@@ -378,35 +368,35 @@ void SStepper::step(long step)
 {
 	switch (step & 0x7)
     {
-	case 0:    // 1000
+	case 0:    // 1001
 	    setOutputPins(0b0001);
             break;
 
-        case 1:    // 1010
-	    setOutputPins(0b0101);
+        case 1:    // 1000
+	    setOutputPins(0b0011);
             break;
 
-	case 2:    // 0010
-	    setOutputPins(0b0100);
-            break;
-
-        case 3:    // 0110
-	    setOutputPins(0b0110);
-            break;
-
-	case 4:    // 0100
+	case 2:    // 1100
 	    setOutputPins(0b0010);
             break;
 
-        case 5:    //0101
-	    setOutputPins(0b1010);
+        case 3:    // 0100
+	    setOutputPins(0b0110);
             break;
 
-	case 6:    // 0001
+	case 4:    // 0110
+	    setOutputPins(0b0100);
+            break;
+
+        case 5:    //0010
+	    setOutputPins(0b1100);
+            break;
+
+	case 6:    // 0011
 	    setOutputPins(0b1000);
             break;
 
-        case 7:    //1001
+        case 7:    //0001
 	    setOutputPins(0b1001);
             break;
     }

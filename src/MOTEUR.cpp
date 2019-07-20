@@ -1,3 +1,5 @@
+#include<Arduino.h>
+/*
 float distance_rotation(float angle){
   const float rayon_robot = 56.45;// cette distance correspond à la ditance entre les joints toriques
 
@@ -63,3 +65,4 @@ void tourner_droite(float angle, int vitesse, int steprevolution, float perimetr
     }
 }
 
+*/

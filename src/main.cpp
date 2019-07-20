@@ -1,9 +1,13 @@
 #include <Arduino.h>
+#include <Boby.h>
+
+Boby robot;
 
 void setup() {
-  // put your setup code here, to run once:
+  robot.init();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  robot.avancer(100);
+  robot.tournerDroite(90);
 }

@@ -2,15 +2,7 @@
 #define BobySteppers_h
 
 #include <stdlib.h>
-#if ARDUINO >= 100
 #include <Arduino.h>
-#else
-#include <WProgram.h>
-#include <wiring.h>
-#endif
-
-#undef round
-
 #define MULTISTEPPER_MAX_STEPPERS 2
 
 
@@ -52,13 +44,13 @@ public:
     /// preferably in your main loop. Note that each call to run() will make at most one step, and then only when a step is due,
     /// based on the current speed and the time since the last step.
     /// \return true if the motor is still running to the target position.
-    boolean run();
+    bool run();
 
     /// Poll the motor and step it if a step is due, implementing a constant
     /// speed as set by the most recent call to setSpeed(). You must call this as
     /// frequently as possible, but at least once per step interval,
     /// \return true if the motor was stepped.
-    boolean runSpeed();
+    bool runSpeed();
 
     /// Sets the maximum permitted speed. The run() function will accelerate
     /// up to the speed set by this function.
@@ -117,7 +109,7 @@ public:
     /// Runs at the currently selected speed until the target position is reached
     /// Does not implement accelerations.
     /// \return true if it stepped
-    boolean runSpeedToPosition();
+    bool runSpeedToPosition();
 
     /// Moves the motor (with acceleration/deceleration)
     /// to the new target position and blocks until it is at
@@ -182,7 +174,7 @@ protected:
     /// Symbolic names for the direction the motor is turning
     typedef enum
     {
-	DIRECTION_CCW = 0,  ///< Counter-Clockwise
+	      DIRECTION_CCW = 0,  ///< Counter-Clockwise
         DIRECTION_CW  = 1   ///< Clockwise
     } Direction;
 
@@ -194,7 +186,7 @@ protected:
     virtual void   step(long step);
 
 
-    boolean _direction; // 1 == CW
+    bool _direction; // 1 == CW
 
 private:
 
@@ -300,10 +292,8 @@ private:
 	SStepper _stepperG;
 
   // PIN MOTEUR Boby ( A partir de la version 1)
-  const uint8_t BobyGaucheB2 = 3, BobyGaucheB1 = 2, BobyGaucheA2 = 0, BobyGaucheA1 = 1 ;
-  const uint8_t BobyDroitB2 = 6, BobyDroitB1 = 8, BobyDroitA2 = 4, BobyDroitA1 = 12 ;
-
+  const uint8_t BobyGaucheB2 = 13, BobyGaucheB1 = 11, BobyGaucheA2 = 12, BobyGaucheA1 = 10 ;
+  const uint8_t BobyDroitB2 = 7, BobyDroitB1 = 5, BobyDroitA2 = 6, BobyDroitA1 = 4 ;
 };
-
 
 #endif

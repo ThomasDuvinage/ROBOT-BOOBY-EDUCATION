@@ -1,5 +1,5 @@
-#ifndef BotlySteppers_h
-#define BotlySteppers_h
+#ifndef BobySteppers_h
+#define BobySteppers_h
 
 #include <stdlib.h>
 #if ARDUINO >= 100
@@ -14,16 +14,16 @@
 #define MULTISTEPPER_MAX_STEPPERS 2
 
 
-// // PIN MOTEUR BOTLY ( A partir de la version 1)
-// #define BotlyGaucheB2  3
-// #define BotlyGaucheB1  2
-// #define BotlyGaucheA2  0
-// #define BotlyGaucheA1  1
+// // PIN MOTEUR Boby ( A partir de la version 1)
+// #define BobyGaucheB2  3
+// #define BobyGaucheB1  2
+// #define BobyGaucheA2  0
+// #define BobyGaucheA1  1
 //
-// #define BotlyDroitB2  6
-// #define BotlyDroitB1  8
-// #define BotlyDroitA2  4
-// #define BotlyDroitA1  12
+// #define BobyDroitB2  6
+// #define BobyDroitB1  8
+// #define BobyDroitA2  4
+// #define BobyDroitA1  12
 
 
 /*****************************************************
@@ -263,16 +263,16 @@ private:
 
 /*****************************************************
  *      	    Déifinition de la classe             *
- *                   BotlySteppers                   *
+ *                   BobySteppers                   *
  *                                                   *
  *****************************************************/
 
 
 
-class BotlySteppers{
+class BobySteppers{
 public:
 
-	BotlySteppers();
+	BobySteppers();
 
 	bool run();
 
@@ -299,9 +299,9 @@ private:
   SStepper _stepperD;
 	SStepper _stepperG;
 
-  // PIN MOTEUR BOTLY ( A partir de la version 1)
-  const uint8_t BotlyGaucheB2 = 3, BotlyGaucheB1 = 2, BotlyGaucheA2 = 0, BotlyGaucheA1 = 1 ;
-  const uint8_t BotlyDroitB2 = 6, BotlyDroitB1 = 8, BotlyDroitA2 = 4, BotlyDroitA1 = 12 ;
+  // PIN MOTEUR Boby ( A partir de la version 1)
+  const uint8_t BobyGaucheB2 = 3, BobyGaucheB1 = 2, BobyGaucheA2 = 0, BobyGaucheA1 = 1 ;
+  const uint8_t BobyDroitB2 = 6, BobyDroitB1 = 8, BobyDroitA2 = 4, BobyDroitA1 = 12 ;
 
 };
 

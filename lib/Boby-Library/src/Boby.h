@@ -7,24 +7,24 @@
                    ;
                 `-'
 * [foo description]
-* Librairie principale des robots Botly et Scott
+* Librairie principale des robots Boby et Scott
 * @date         2018-11-22
 * @author       Jules T. / Adrien B. / Alexandre P.
 * @entreprise   La Machinerie
 * @version      V2.0.3
 */
 
-#ifndef Botly_h
-#define Botly_h
+#ifndef Boby_h
+#define Boby_h
 #define LIBRARY_VERSION	2.0.3
 
 /*********************************
      Constantes de calibrations
  *********************************/
 
-#define BOTLY_MM_TO_STEP 345
-#define BOTLY_RAD_TO_STEP 1861
-#define BOTLY_DELTA_ARC 47
+#define Boby_MM_TO_STEP 345
+#define Boby_RAD_TO_STEP 1861
+#define Boby_DELTA_ARC 47
 
 
 /*********************
@@ -38,11 +38,11 @@
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 
-#include "BotlySteppers.h"
+#include "BobySteppers.h"
 
 void pin2_isr();
 
-class Botly{
+class Boby{
 public:
 
   Servo crayon;
@@ -52,9 +52,9 @@ public:
   int pin = 9;
   IRrecv irrecv = new IRrecv(pin);
 
-  Botly();
+  Boby();
 
-  Botly(int version);
+  Boby(int version);
 
   void init();
 
@@ -109,7 +109,7 @@ public:
   void bougerCrayon(int angle);
 
   // ----------------------------
-  // Fonctions dédiées à BotlyV1
+  // Fonctions dédiées à BobyV1
   // ----------------------------
 
   void isIRDataReceived();
@@ -128,23 +128,23 @@ public:
 
 private:
 
-  int _pinBotlyServo= 11  ; // Pin servo pour BotlyV1
+  int _pinBobyServo= 11  ; // Pin servo pour BobyV1
 
-  // Définition des pins à partir de la version BotlyV1
+  // Définition des pins à partir de la version BobyV1
   int _pinTsop = 9;
-  int _pinBotlyIrEmetteur = 13 ;
+  int _pinBobyIrEmetteur = 13 ;
   int _pinMesureBatterie = A5;
   int _pinBuzzer = 7;
-  BotlySteppers *Steppers;
+  BobySteppers *Steppers;
 
   // Variable capteur de distance
   int _distDroite;
   int _distGauche;
 
   // Variable Crayon
-  // Version Botly
-  int _botlyBas = 90;
-  int _botlyHaut = 50;
+  // Version Boby
+  int _BobyBas = 90;
+  int _BobyHaut = 50;
 
   // Variables de calibration des deplacements
   int _mmToStep = 0;

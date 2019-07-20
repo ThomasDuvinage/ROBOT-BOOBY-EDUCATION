@@ -1,23 +1,23 @@
 #include <Arduino.h>
-#include "Botly.h"
+#include "Boby.h"
 
 
-Botly::Botly(){
-	Steppers = new BotlySteppers();
+Boby::Boby(){
+	Steppers = new BobySteppers();
 }
 
-void Botly::init()
+void Boby::init()
 {
 	analogReference(INTERNAL); //reference analogique 2.56V
 
-	crayon.attach(_pinBotlyServo);
-	crayon.write(_botlyHaut);
+	crayon.attach(_pinBobyServo);
+	crayon.write(_BobyHaut);
 
-	pinMode(_pinBotlyIrEmetteur, OUTPUT);
-	digitalWrite(_pinBotlyIrEmetteur, LOW);
+	pinMode(_pinBobyIrEmetteur, OUTPUT);
+	digitalWrite(_pinBobyIrEmetteur, LOW);
 
-	setCalibration(BOTLY_MM_TO_STEP, BOTLY_RAD_TO_STEP);
-	_deltaArc = BOTLY_DELTA_ARC;
+	setCalibration(Boby_MM_TO_STEP, Boby_RAD_TO_STEP);
+	_deltaArc = Boby_DELTA_ARC;
 
 	//Jouer un son de demarrage
 	delay(500);
@@ -34,35 +34,35 @@ void Botly::init()
 
 }
 
-void Botly::run(){
+void Boby::run(){
   Steppers->run();
 }
 
-void Botly::setCalibration(int distance, int rotation){
+void Boby::setCalibration(int distance, int rotation){
 	_mmToStep = distance;
 	_radToStep = rotation;
 }
 
-void Botly::setSpeed(float vitesse){
+void Boby::setSpeed(float vitesse){
 	Steppers->setSpeed(vitesse);
 }
 
-void Botly::setSpeed( float vitesseD, float vitesseG){
+void Boby::setSpeed( float vitesseD, float vitesseG){
 	Steppers->setSpeed(vitesseD, vitesseG);
 }
 
-void Botly::logSpeed(){
+void Boby::logSpeed(){
 	Serial.print("Vitesse : "); Serial.print(Steppers->getSpeed(0)); Serial.print(" | "); Serial.println(Steppers->getSpeed(1));
 	Serial.print("Vitesse max : "); Serial.print(Steppers->getMaxSpeed(0)); Serial.print(" | "); Serial.println(Steppers->getMaxSpeed(1));
 }
 
 
-void Botly::turnGoDegree(float angle, long ligne){
+void Boby::turnGoDegree(float angle, long ligne){
   angle = angle * DEG_TO_RAD ; // Passage en radians
   turnGo(angle, ligne);
 }
 
-void Botly::turnGo(float angle, long ligne){
+void Boby::turnGo(float angle, long ligne){
 
   if(angle > 0 && angle < PI){
     gauche( int( (angle * _radToStep)) );
@@ -89,26 +89,26 @@ void Botly::turnGo(float angle, long ligne){
 }
 
 
-void Botly::avant(long pas){
+void Boby::avant(long pas){
 	Steppers->moveTo(-pas, pas);
 	Steppers->runSpeedToPosition(); //Blockling...
 	Steppers->setPositions();
 }
 
-void Botly::arriere(long pas){
+void Boby::arriere(long pas){
 	Steppers->moveTo(pas, -pas);
 	Steppers->runSpeedToPosition();//Blockling...
 	Steppers->setPositions();
 }
 
-void Botly::gauche(long pas){
+void Boby::gauche(long pas){
 	Steppers->moveTo(-pas, -pas);
 	Steppers->runSpeedToPosition();//Blockling...
 	Steppers->setPositions();
 
 }
 
-void Botly::droite(long pas){
+void Boby::droite(long pas){
 	Steppers->moveTo(pas, pas);
 	Steppers->runSpeedToPosition();//Blockling...
 	Steppers->setPositions();
@@ -116,7 +116,7 @@ void Botly::droite(long pas){
 
 
 //Battery Power save !!!!
-void Botly::stop(long temps){
+void Boby::stop(long temps){
 	if(temps > 40){
 		delay(20);
 		Steppers->disable();
@@ -129,27 +129,27 @@ void Botly::stop(long temps){
 }
 
 //Battery Power save !!!!
-void Botly::stop(){
+void Boby::stop(){
 	Steppers->disable();
 }
 
-void Botly::tournerGauche(long angleDegree){
+void Boby::tournerGauche(long angleDegree){
 	gauche(long((angleDegree * DEG_TO_RAD * _radToStep)));
 }
 
-void Botly::tournerDroite(long angleDegree){
+void Boby::tournerDroite(long angleDegree){
 	droite(long((angleDegree * DEG_TO_RAD *_radToStep)));
 }
 
-void Botly::avancer(long distanceMillimeter){
+void Boby::avancer(long distanceMillimeter){
 	turnGoDegree(0, distanceMillimeter);
 }
 
-void Botly::reculer(long distanceMillimeter){
+void Boby::reculer(long distanceMillimeter){
 	turnGoDegree(0, -distanceMillimeter);
 }
 
-void Botly::polygone(unsigned int nbrCote, unsigned int longueur){
+void Boby::polygone(unsigned int nbrCote, unsigned int longueur){
 	if (nbrCote >=3)
 	{
 		float polyAngle = 360 / nbrCote;
@@ -162,7 +162,7 @@ void Botly::polygone(unsigned int nbrCote, unsigned int longueur){
 	}
 }
 
-void Botly::rectangle(unsigned int largeur, unsigned int longueur){
+void Boby::rectangle(unsigned int largeur, unsigned int longueur){
 	turnGoDegree(0,largeur);
 	turnGoDegree(90,longueur);
 	turnGoDegree(90,largeur);
@@ -170,17 +170,17 @@ void Botly::rectangle(unsigned int largeur, unsigned int longueur){
 	turnGoDegree(90,0);
 }
 
-void Botly::carre(unsigned int longueur){
+void Boby::carre(unsigned int longueur){
 	rectangle(longueur,longueur);
 }
 
-void Botly::cercle(unsigned int diametre){
+void Boby::cercle(unsigned int diametre){
 	float angleCercle = 11 * DEG_TO_RAD ; // Passage en radians
 	unsigned int corde = (diametre * angleCercle )/2 ;
 	polygone(32,corde * 1.25); // 33=arrondi de 360/11
 }
 
-void Botly::arc( float rayon,float angle){
+void Boby::arc( float rayon,float angle){
 	int pasD, pasG;
 	if(angle > 0){
 		pasD = ((rayon - _deltaArc) * angle*DEG_TO_RAD) * (_mmToStep/10);
@@ -192,40 +192,40 @@ void Botly::arc( float rayon,float angle){
 	Steppers->moveTo(pasD, pasG);
 }
 
-void Botly::leverCrayon(){
-	crayon.write(_botlyHaut);
+void Boby::leverCrayon(){
+	crayon.write(_BobyHaut);
 }
 
-void Botly::poserCrayon(){
-	crayon.write(_botlyBas);
+void Boby::poserCrayon(){
+	crayon.write(_BobyBas);
 }
 
-void Botly::bougerCrayon(int angle)
+void Boby::bougerCrayon(int angle)
 {
 	crayon.write(angle);
 }
 
 //--------------------------------------------
-// Fonctions pour la version BOTLY V1 du robot
+// Fonctions pour la version Boby V1 du robot
 //--------------------------------------------
 
-void Botly::isIRDataReceived(){
+void Boby::isIRDataReceived(){
 	if (irrecv.decode(&results)) {
     Serial.println(results.value, HEX);
     irrecv.resume(); // Receive the next value
     }
 }
 
-void Botly::initIRcom(){
+void Boby::initIRcom(){
 	irrecv.enableIRIn(); // Start the receiver
 }
 
-void Botly::sonyCode(byte data){
+void Boby::sonyCode(byte data){
 	irsend.sendSony(data, 8);
 }
 
 
-bool Botly::proximite(int ite, int trigger)
+bool Boby::proximite(int ite, int trigger)
 {
 	int validDetection = 0;
 	trigger = (trigger > ite) ? ite : trigger ;
@@ -240,9 +240,9 @@ bool Botly::proximite(int ite, int trigger)
 
 		for(int i = 0; i <= 31; i++)
 		{
-			digitalWrite(_pinBotlyIrEmetteur, HIGH);
+			digitalWrite(_pinBobyIrEmetteur, HIGH);
 			delayMicroseconds(8);
-			digitalWrite(_pinBotlyIrEmetteur, LOW);
+			digitalWrite(_pinBobyIrEmetteur, LOW);
 			delayMicroseconds(13);
 			if(digitalRead(_pinTsop)==LOW)
 			{
@@ -262,13 +262,13 @@ Méthode de recalcul: (2.56/1024)*mesureAnalogique
 Ne pas oublier le rapport de transformation du pont diviseur
 en hardware
 */
-int Botly::mesureBatterie()
+int Boby::mesureBatterie()
 {
 	int mesureAnalogique=analogRead(_pinMesureBatterie);
 	return mesureAnalogique;
 }
 
-void Botly::sleepNow()
+void Boby::sleepNow()
 {
 	/* In the Atmega32u4 datasheet on page 62
 	 * there is a list of sleep modes which explains which clocks and
@@ -292,7 +292,7 @@ void Botly::sleepNow()
 	power_all_enable(); //restore power on peripherals
 }
 
-void Botly::sleepWakeup()
+void Boby::sleepWakeup()
 {
 	/* In the Atmega32u4 datasheet on page 62
 	 * there is a list of sleep modes which explains which clocks and

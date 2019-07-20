@@ -83,6 +83,8 @@ public:
 
   void arc(float rayon,float angle);
 
+  float distance();
+
 private:
 
   BobySteppers *Steppers;
@@ -90,6 +92,9 @@ private:
   // Variable capteur de distance
   int _distDroite;
   int _distGauche;
+
+  int pinUltraEcho = 8;
+  int pinUltraTrigger = 9;
 
 
   // Variables de calibration des deplacements

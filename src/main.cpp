@@ -4,10 +4,11 @@
 Boby robot;
 
 void setup() {
+  Serial.begin(9600);
   robot.init();
 }
 
 void loop() {
-  robot.avancer(100);
-  robot.tournerDroite(90);
+  robot.avancer(20);
+  Serial.println(robot.distance());
 }

@@ -176,3 +176,23 @@ void Boby::arc( float rayon,float angle){
 	}
 	Steppers->moveTo(pasD, pasG);
 }
+
+
+
+float Boby::distance(){
+  pinMode(pinUltraTrigger, OUTPUT);
+  digitalWrite(pinUltraTrigger, LOW);
+  delayMicroseconds(5);
+  digitalWrite(pinUltraTrigger, HIGH);
+  delayMicroseconds(7);
+  digitalWrite(pinUltraTrigger, LOW);
+ 
+  // Read the signal from the sensor: a HIGH pulse whose
+  // duration is the time (in microseconds) from the sending
+  // of the ping to the reception of its echo off of an object.
+  pinMode(pinUltraEcho, INPUT);
+  float duration = pulseIn(pinUltraEcho, HIGH);
+ 
+  // Convert the time into a distance
+  return (duration/2) / 2.91; // distance in mm
+}

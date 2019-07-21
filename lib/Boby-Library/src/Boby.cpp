@@ -196,3 +196,27 @@ float Boby::distance(){
   // Convert the time into a distance
   return (duration/2) / 2.91; // distance in mm
 }
+
+void Boby::avoid_obstacles(){
+	//this void allowed the robot to avoid obstacles 
+	//for example if an obstable is in front of the robot, it will avoid it and return on the way it was.
+	int i = 0; //this  variable permit to count the angle
+	srand(time(0));
+	int choix = rand()%2;
+
+	switch (choix)
+	{
+	case 0:
+		do
+		{
+			//TODO add the algorythm
+		} while (distance() < 100 && i < 30);
+		break;
+	
+	default:
+		break;
+	}
+
+	
+
+}

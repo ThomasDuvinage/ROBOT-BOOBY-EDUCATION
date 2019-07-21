@@ -27,6 +27,7 @@
 #include <avr/power.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
+#include <time.h>
 
 #include "BobySteppers.h"
 
@@ -84,6 +85,8 @@ public:
   void arc(float rayon,float angle);
 
   float distance();
+
+  void Boby::avoid_obstacles();
 
 private:
 

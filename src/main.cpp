@@ -9,6 +9,13 @@ void setup() {
 }
 
 void loop() {
-  robot.avancer(20);
-  Serial.println(robot.distance());
+  // Serial.println(robot.distance());
+
+  if(robot.distance() >= 160){
+    robot.avancer(10);
+  }
+  else
+  {
+    robot.avoid_obstacles(130);
+  }
 }

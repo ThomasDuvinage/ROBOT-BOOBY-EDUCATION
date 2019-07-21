@@ -197,26 +197,31 @@ float Boby::distance(){
   return (duration/2) / 2.91; // distance in mm
 }
 
-void Boby::avoid_obstacles(){
+void Boby::avoid_obstacles(unsigned long robot_diagonal){//for my robot it is 13cm
 	//this void allowed the robot to avoid obstacles 
 	//for example if an obstable is in front of the robot, it will avoid it and return on the way it was.
-	int i = 0; //this  variable permit to count the angle
-	srand(time(0));
-	int choix = rand()%2;
+	int securite = 30;//permit to be sure that the robot will not touch the obstacle
+	int n = 0; //count the number that the robot went forward
 
-	switch (choix)
+
+	while (distance() < (robot_diagonal + securite))
 	{
-	case 0:
-		do
-		{
-			//TODO add the algorythm
-		} while (distance() < 100 && i < 30);
-		break;
-	
-	default:
-		break;
+		tournerDroite(70);
+		avancer(50);
+		tournerGauche(70);
+		n+=50;
 	}
 
-	
+	avancer(50 + robot_diagonal + securite);
+	tournerGauche(70);
+
+	while (distance() < (robot_diagonal + securite)){
+		tournerDroite(70);
+		avancer(50);
+		tournerGauche(70);
+	}
+
+	avancer(n);
+	tournerDroite(70);
 
 }

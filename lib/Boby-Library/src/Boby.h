@@ -28,8 +28,8 @@
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 #include <time.h>
+#include <BobySteppers.h>
 
-#include "BobySteppers.h"
 
 class Boby{
 public:
@@ -86,7 +86,7 @@ public:
 
   float distance();
 
-  void Boby::avoid_obstacles();
+  void avoid_obstacles(unsigned long robot_diagonal);
 
 private:
 

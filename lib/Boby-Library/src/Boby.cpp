@@ -212,6 +212,10 @@ void Boby::avoid_obstacles(unsigned long robot_diagonal){//for my robot it is 13
 		n+=50;
 	}
 
+	tournerDroite(70);
+	avancer(70);//cette distance correpond à la moitie de la largeur du robot
+	n+=70;
+	tournerGauche(70);
 	avancer(50 + robot_diagonal + securite);
 	tournerGauche(70);
 
@@ -223,5 +227,4 @@ void Boby::avoid_obstacles(unsigned long robot_diagonal){//for my robot it is 13
 
 	avancer(n);
 	tournerDroite(70);
-
 }

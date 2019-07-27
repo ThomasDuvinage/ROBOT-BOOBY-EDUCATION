@@ -179,52 +179,56 @@ void Boby::arc( float rayon,float angle){
 
 
 
-float Boby::distance(){
-  pinMode(pinUltraTrigger, OUTPUT);
-  digitalWrite(pinUltraTrigger, LOW);
+float Boby::distance_Milieu(){
+  pinMode(pinUltraTriggerMilieu, OUTPUT);
+  digitalWrite(pinUltraTriggerMilieu, LOW);
   delayMicroseconds(5);
-  digitalWrite(pinUltraTrigger, HIGH);
+  digitalWrite(pinUltraTriggerMilieu, HIGH);
   delayMicroseconds(7);
-  digitalWrite(pinUltraTrigger, LOW);
+  digitalWrite(pinUltraTriggerMilieu, LOW);
  
   // Read the signal from the sensor: a HIGH pulse whose
   // duration is the time (in microseconds) from the sending
   // of the ping to the reception of its echo off of an object.
-  pinMode(pinUltraEcho, INPUT);
-  float duration = pulseIn(pinUltraEcho, HIGH);
+  pinMode(pinUltraEchoMilieu, INPUT);
+  float duration = pulseIn(pinUltraEchoMilieu, HIGH);
  
   // Convert the time into a distance
   return (duration/2) / 2.91; // distance in mm
 }
 
-void Boby::avoid_obstacles(unsigned long robot_diagonal){//for my robot it is 13cm
-	//this void allowed the robot to avoid obstacles 
-	//for example if an obstable is in front of the robot, it will avoid it and return on the way it was.
-	int securite = 30;//permit to be sure that the robot will not touch the obstacle
-	int n = 0; //count the number that the robot went forward
+float Boby::distance_Droite(){
+  pinMode(pinUltraTriggerDroite, OUTPUT);
+  digitalWrite(pinUltraTriggerDroite, LOW);
+  delayMicroseconds(5);
+  digitalWrite(pinUltraTriggerDroite, HIGH);
+  delayMicroseconds(7);
+  digitalWrite(pinUltraTriggerDroite, LOW);
+ 
+  // Read the signal from the sensor: a HIGH pulse whose
+  // duration is the time (in microseconds) from the sending
+  // of the ping to the reception of its echo off of an object.
+  pinMode(pinUltraEchoDroite, INPUT);
+  float duration = pulseIn(pinUltraEchoDroite, HIGH);
+ 
+  // Convert the time into a distance
+  return (duration/2) / 2.91; // distance in mm
+}
 
-
-	while (distance() < (robot_diagonal + securite))
-	{
-		tournerDroite(70);
-		avancer(50);
-		tournerGauche(70);
-		n+=50;
-	}
-
-	tournerDroite(70);
-	avancer(70);//cette distance correpond à la moitie de la largeur du robot
-	n+=70;
-	tournerGauche(70);
-	avancer(50 + robot_diagonal + securite);
-	tournerGauche(70);
-
-	while (distance() < (robot_diagonal + securite)){
-		tournerDroite(70);
-		avancer(50);
-		tournerGauche(70);
-	}
-
-	avancer(n);
-	tournerDroite(70);
+float Boby::distance_Gauche(){
+  pinMode(pinUltraTriggerGauche ,OUTPUT);
+  digitalWrite(pinUltraTriggerGauche, LOW);
+  delayMicroseconds(5);
+  digitalWrite(pinUltraTriggerGauche, HIGH);
+  delayMicroseconds(7);
+  digitalWrite(pinUltraTriggerGauche, LOW);
+ 
+  // Read the signal from the sensor: a HIGH pulse whose
+  // duration is the time (in microseconds) from the sending
+  // of the ping to the reception of its echo off of an object.
+  pinMode(pinUltraEchoGauche, INPUT);
+  float duration = pulseIn(pinUltraEchoGauche, HIGH);
+ 
+  // Convert the time into a distance
+  return (duration/2) / 2.91; // distance in mm
 }

@@ -84,9 +84,16 @@ public:
 
   void arc(float rayon,float angle);
 
-  float distance();
+  float distance_Milieu();
+
+  float distance_Droite();
+
+  float distance_Gauche();
 
   void avoid_obstacles(unsigned long robot_diagonal);
+
+  void autonomous_direction();
+
 
 private:
 
@@ -96,8 +103,14 @@ private:
   int _distDroite;
   int _distGauche;
 
-  int pinUltraEcho = 8;
-  int pinUltraTrigger = 9;
+  int pinUltraEchoMilieu = 8;
+  int pinUltraTriggerMilieu = 9;
+
+  int pinUltraEchoDroite = 8;
+  int pinUltraTriggerDroite = 9;
+
+  int pinUltraEchoGauche = 8;//depend of your pin on arduino
+  int pinUltraTriggerGauche = 9;
 
 
   // Variables de calibration des deplacements

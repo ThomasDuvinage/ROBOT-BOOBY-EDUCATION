@@ -10,7 +10,7 @@ void setup() {
 void loop() {
   // Serial.println(robot.distance());
 
-  if(robot.distance() >= 160){
+  if(robot.distance_Milieu() >= 160){
     robot.avancer(10);
   }
   else

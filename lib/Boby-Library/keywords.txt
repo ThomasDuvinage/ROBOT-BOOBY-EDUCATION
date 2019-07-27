@@ -28,3 +28,5 @@ carre			KEYWORD2
 cercle			KEYWORD2
 arc				KEYWORD2
 lectureDistance	KEYWORD2
+avoid_obstacles KEYWORD2
+autonomous_direction KEYWORD2

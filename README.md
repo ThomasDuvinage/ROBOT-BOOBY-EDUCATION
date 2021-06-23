@@ -1,7 +1,6 @@
 # ROBOT-BOOBY-EDUCATION
 
-This project is a robot use in eduaction formations to teach to childs ans adults how to draw in SOLIDWORKS and how to code in arduino.
-
+This robot is used during educational training, it helps to teach children and adults to draw in SOLIDWORKS and to code using Arduino.
 
 ## To see all parts of the robot you need to go to Grabcad and search for LITTLE ROBOT. 
 
